@@ -10,9 +10,9 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
-    - run: apt-get install qemu-utils
+    - run: sudo apt-get install qemu-utils
     - run: wget https://raw.githubusercontent.com/alpinelinux/alpine-make-vm-image/v0.6.0/alpine-make-vm-image && echo 'a0fc0b4886b541bb4dd7b91b4e1e99719a1700da  alpine-make-vm-image' | sha1sum -c || exit 1
       name: install alpine-make
-    - run: ./build.sh
+    - run: sudo ./build.sh
       env:
         CI: true
