@@ -14,7 +14,6 @@ jobs:
       with:
         fetch-depth: 1
     - run: sudo apt-get install qemu-utils
-    - run: sudo apt-get install nbd-server && sudo modprobe nbd
     - run: wget https://raw.githubusercontent.com/alpinelinux/alpine-make-vm-image/v0.6.0/alpine-make-vm-image && echo 'a0fc0b4886b541bb4dd7b91b4e1e99719a1700da  alpine-make-vm-image' | sha1sum -c || exit 1
       name: install alpine-make
     - run: chmod +x ./example/configure.sh && chmod +x ./alpine-make-vm-image
