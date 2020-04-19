@@ -16,26 +16,24 @@ jobs:
     - run: sudo apt-get install qemu-utils bzip2
     - run: wget https://raw.githubusercontent.com/alpinelinux/alpine-make-vm-image/v0.6.0/alpine-make-vm-image && echo 'a0fc0b4886b541bb4dd7b91b4e1e99719a1700da  alpine-make-vm-image' | sha1sum -c || exit 1
       name: install alpine-make
-    - run: chmod +x ./example/configure.sh && chmod +x ./alpine-make-vm-image
+    - run: chmod +x ./config/setup.sh && chmod +x ./alpine-make-vm-image
       name: Scripts Permission
     - run: mkdir ./latest
-      name: Scripts Permission
+      name: Create publish directory
     - run: >-
         sudo ./alpine-make-vm-image 
         --image-format qcow2 
-        --image-size 2G 
-        --repositories-file example/repositories 
-        --packages "$(cat example/packages)" 
+        --repositories-file config/repositories 
+        --packages "$(cat config/packages)" 
         --script-chroot 
-        $FILENAME -- ./example/configure.sh && bzip2 -z $FILENAME && mv $FILENAME.bz2 ./latest/
+        $FILENAME -- ./config/setup.sh && bzip2 -z $FILENAME && mv $FILENAME.bz2 ./latest/
 
       name: build
       env:
         CI: true
         FILENAME: 'alpine-image.qcow2'
-    - name: Upload artifact
+    - name: Upload artifacts
       uses: actions/upload-artifact@v1
       with:
-        name: Alpine Image
-        # Directory containing files to upload
+        name: Alpine Latest
         path: latest/
