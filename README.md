@@ -3,6 +3,8 @@
 
 Build Alpine image (latest version) for Digitalocean Droplets.
 
+![Alpine DigitalOcean](https://cdn.giansalex.dev/images/github/alpine-digitalocean.png)
+
 ## Build
 
 This repository use Github Actions for build image.
