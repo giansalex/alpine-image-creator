@@ -1,15 +1,17 @@
 # Alpine Image for Digitalocean
 ![Alpine-Image](https://github.com/giansalex/alpine-image-creator/workflows/Alpine-Image/badge.svg)
 
-Build Alpine image (latest version) for Digitalocean Droplets.
+Alpine image (latest version) for Digitalocean Droplets.
 
 ![Alpine DigitalOcean](https://cdn.giansalex.dev/images/github/alpine-digitalocean.png)
 
-## Build
+## Download
 
-This repository use Github Actions for build image.
+This repository use Github Actions for build alpine image.
 
-View workflow on `.github/workflows/alpine.yml`.
+Download latest image from artifacts. Find [latest build](https://github.com/giansalex/alpine-image-creator/actions).  
+
+> View workflow on `.github/workflows/alpine.yml`.
 
 ## Digitalocean
 
