@@ -20,20 +20,22 @@ jobs:
       name: Scripts Permission
     - run: mkdir ./latest
       name: Create publish directory
-    - run: >-
+    - name: build
+      id: image-build
+      run: >-
+        FILENAME="alpine-image-$(date +%Y-%m-%d-%H%M).qcow2"
+        PATHDIST="latest/"
+        
         sudo ./alpine-make-vm-image 
         --image-format qcow2 
         --repositories-file config/repositories 
         --packages "$(cat config/packages)" 
         --script-chroot 
-        $FILENAME -- ./config/setup.sh && bzip2 -z $FILENAME && mv $FILENAME.bz2 ./latest/
-
-      name: build
-      env:
-        CI: true
-        FILENAME: 'alpine-image.qcow2'
+        $FILENAME -- ./config/setup.sh && bzip2 -z $FILENAME && mv $FILENAME.bz2 $PATHDIST
+        echo "::set-output name=dir::$PATHDIST"
+      
     - name: Upload artifacts
       uses: actions/upload-artifact@v1
       with:
         name: Alpine Latest
-        path: latest/
+        path: ${{ steps.image-build.outputs.dir }}
