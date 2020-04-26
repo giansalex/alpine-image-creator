@@ -31,7 +31,8 @@ jobs:
         --repositories-file config/repositories 
         --packages "$(cat config/packages)" 
         --script-chroot 
-        $FILENAME -- ./config/setup.sh && bzip2 -z $FILENAME && mv $FILENAME.bz2 $PATHDIST
+        $FILENAME -- ./config/setup.sh && bzip2 -z $FILENAME && mv $FILENAME.bz2 $PATHDIST;
+
         echo "::set-output name=dir::$PATHDIST"
       
     - name: Upload artifacts
